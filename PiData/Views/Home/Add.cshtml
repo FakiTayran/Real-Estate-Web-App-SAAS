@@ -1,0 +1,44 @@
+﻿@model Estate
+@{
+    ViewData["Title"] = "Add";
+}
+
+<div class="container text-center">
+    <h1 class="display-4">Create New Property for @ViewBag.customerNameSurname</h1>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <form method="post" action=@Url.Action("Add","Home")>
+                <div class="form-group">
+                    <label for="PropertType" class="m-1"><b>Property Type</b></label>
+                    <select class="form-control" asp-for="@Model.PropertyType" asp-items="Html.GetEnumSelectList<PropertyType>()">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="SquareMeter" class="m-1"><b>Square Meter</b></label>
+                    <input type="number" class="form-control" asp-for="SquareMeter" min="10" value="10" max="1000">
+                </div>
+                <div class="form-group">
+                    <label for="NumberOfRooms" class="m-1"><b>Number Of Rooms</b></label>
+                    <input type="number" class="form-control" asp-for="NumberOfRooms" min="1" value="1" max="10">
+                </div>
+                <div class="form-group">
+                    <label for="FloorLocation" class="m-1"><b>Floor</b></label>
+                    <input type="number" class="form-control" asp-for="FloorLocation" min="-4" value="0" max="46">
+                </div>
+                <div class="form-group">
+                    <label for="BuildingFloor" class="m-1"><b>Building Floor</b></label>
+                    <input type="number" class="form-control" asp-for="BuildingFloor" min="1" value="1" max="50">
+                </div>
+                <div class="form-group">
+                    <label for="WarmingType" class="m-1"><b>Warming Type</b></label>
+                    <select class="form-control" asp-for="@Model.WarmingType" asp-items="Html.GetEnumSelectList<WarmingType>()">
+                    </select>
+                </div>
+                <input type="hidden" value="@ViewBag.customerId" asp-for="OwnerId" />
+                <button type="submit" class="btn btn-info form-control">Add Estate</button>
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+﻿@model Estate
+@{
+    ViewData["Title"] = "Detail";
+}
+<div class="text-center mb-3"><button class="btn btn-dark btn-lg" id="print" onclick="printDiv()"><i class="fas fa-print fa-2x"></i></button></div>
+<div class="container text-center bg-info" style="border-radius:40px" id="printable">
+    <h1 class="display-4">ID : @Model.Id - Property Detail</h1>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            @if (Model.Owner != null)
+            {
+                <div class="form-group">
+                    <label for="WarmingType" class="m-1 form-control"><b>Owner Name : @Model.Owner.Name</b></label>
+                </div>
+                <div class="form-group">
+                    <label for="WarmingType" class="m-1 form-control"><b>Owner Surname : @Model.Owner.Surname</b></label>
+                </div>
+                <div class="form-group">
+                    <label for="WarmingType" class="m-1 form-control"><b>Owner Phone : @Model.Owner.Phone</b></label>
+                </div>
+                <div class="form-group ">
+                    <label for="WarmingType" class="m-1 form-control"><b>Owner Email : @Model.Owner.Email</b></label>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label for="WarmingType" class="m-1 form-control"><b>Owner Name : </b></label>
+                </div>
+                <div class="form-group">
+                    <label for="WarmingType" class="m-1 form-control"><b>Owner Surname : </b></label>
+                </div>
+                <div class="form-group">
+                    <label for="WarmingType" class="m-1 form-control"><b>Owner Phone : </b></label>
+                </div>
+                <div class="form-group">
+                    <label for="WarmingType" class="m-1 form-control"><b>Owner Email : </b></label>
+                </div>
+            }
+            <div class="form-group">
+                <label for="PropertType" class="m-1 form-control"><b>Property Type : @Model.PropertyType</b></label>
+            </div>
+            <div class="form-group">
+                <label for="SquareMeter" class="m-1 form-control"><b>Square Meter : @Model.SquareMeter M2</b></label>
+            </div>
+            <div class="form-group">
+                <label for="NumberOfRooms" class="m-1 form-control"><b>Number Of Rooms : @Model.NumberOfRooms Rooms</b></label>
+            </div>
+            <div class="form-group">
+                <label for="FloorLocation" class="m-1 form-control"><b>Floor Location: @Model.FloorLocation .Floor</b></label>
+            </div>
+            <div class="form-group">
+                <label for="BuildingFloor" class="m-1 form-control"><b>Building Floor : @Model.BuildingFloor Floor</b></label>
+            </div>
+            <div class="form-group">
+                <label for="WarmingType" class="m-1 form-control"><b>Warming Type : @Model.WarmingType</b></label>
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+
+
+@section scripts{ 
+    <script>
+        function printDiv() {
+
+            var printable = document.getElementById('printable');
+
+            var newWin = window.open('', 'Print-Window');
+
+            newWin.document.open();
+
+            newWin.document.write('<html><body onload="window.print()">' + printable.innerHTML + '</body></html>');
+
+            newWin.document.close();
+
+            setTimeout(function () { newWin.close(); }, 10);
+        }
+    </script>
+
+}

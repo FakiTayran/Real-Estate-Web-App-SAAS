@@ -1,0 +1,65 @@
+﻿@model CustomerIndexViewModel
+@{
+    ViewData["Title"] = "Index";
+
+}
+<div class="row">
+    <div class="col-md-6">
+        <h1>Customers</h1>
+    </div>
+    <div class="col-md-6 d-sm-inline-flex flex-sm-row-reverse">
+        <button class="btn btn-info" onclick="window.location.href='/Customer/Add'"><i class="fas fa-user-plus fa-lg"></i> Add New Customer</button>
+    </div>
+</div>
+
+<table class="table table-active bg-info" id="myTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Description</th>
+            <th>Add Property</th>
+            <th>Delete Customer</th>
+            <th>Edit Customer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model.Customers)
+        {
+            <tr>
+                <th scope="row">@customer.Id</th>
+                <td>@customer.Name</td>
+                <td>@customer.Surname</td>
+                <td>@customer.Phone</td>
+                <td>@customer.Email</td>
+                <td><label>@customer.Description</label></td>
+                <td><a class="btn btn-info ml-4" href="@Url.Action("Add","Home",new {customerId=customer.Id})" style="cursor:pointer"><i class="fas fa-home"></i></a></td>
+                <td><a class="btn btn-danger ml-4 deleteCustomer" data-customer-id="@customer.Id" href="@Url.Action("Delete","Customer",new {id = customer.Id })" style="cursor:pointer"><i class="fas fa-trash"></i></a></td>
+                <td><a class="btn btn-warning ml-4" style="cursor:pointer" href="@Url.Action("Edit","Customer",new {id = customer.Id})"><i class="fas fa-edit"></i></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script>
+        $(".deleteCustomer").click(function () {
+            if (!confirm("Your Customer will be delete after this process ?")) {
+                return false;
+            }
+        });
+
+        var deleteStatus = "@TempData["CustomerDelete"]";
+        if (deleteStatus) {
+            toastr.success("Your Customer has been successfully removed");
+        }
+
+        var editStatus = "@TempData["CustomerEdit"]";
+        if (editStatus) {
+            toastr.success("Your Customer has been successfully updated");
+        }
+    </script>
+}

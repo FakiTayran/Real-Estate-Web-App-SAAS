@@ -1,0 +1,90 @@
+﻿@model HomeIndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="row">
+    <div class="col-md-2 bg-info" style="border-radius:20px">
+        <div class="text-center">
+            <h4 class="display-4">Filters</h4>
+        </div>
+        <form class="my-3" method="get" id="filterForm">
+            <div class="form-group">
+                <label for="PropertType" class="m-1"><b>Property Type</b></label>
+                <select  class="form-control" asp-for="@Model.PropertyType" asp-items="Html.GetEnumSelectList<PropertyType>()">
+                    <option>All</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="SquareMeter" class="m-1"><b>(Min) Square Meter</b></label>
+                <input type="number" class="form-control" asp-for="SquareMeter" min="10" value="" max="1000">
+            </div>
+            <div class="form-group">
+                <label for="NumberOfRooms" class="m-1"><b>Number Of Rooms</b></label>
+                <input type="number" class="form-control" asp-for="NumberOfRooms" min="1" value="" max="10">
+            </div>
+            <div class="form-group">
+                <label for="FloorLocation" class="m-1"><b>(Min) Floor</b></label>
+                <input type="number" class="form-control" asp-for="FloorLocation" min="-4" value="" max="46">
+            </div>
+            <div class="form-group">
+                <label for="BuildingFloor" class="m-1"><b>(Min) Building Floor</b></label>
+                <input type="number" class="form-control" asp-for="BuildingFloor" min="1" value="" max="50">
+            </div>
+            <div class="form-group">
+                <label for="WarmingType" class="m-1"><b>Warming Type</b></label>
+                <select class="form-control" asp-for="@Model.WarmingType" asp-items="Html.GetEnumSelectList<WarmingType>()">
+                    <option>All</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary form-control">Search  <i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    <div class="col-md-10">
+        <div class="text-center">
+            <h1 class="display-4">Estates</h1>
+        </div>
+        <table class="table table-active bg-info" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Property Type</th>
+                    <th scope="col">Square Meter</th>
+                    <th scope="col">Floor Location</th>
+                    <th scope="col">Number Of Rooms Location</th>
+                    <th scope="col">BuildingFloor</th>
+                    <th scope="col">Warming Type</th>
+                    <th scope="col">Owner Name</th>
+                    <th scope="col">Owner Surname</th>
+                    <th scope="col">Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var estate in Model.Estates)
+                {
+                    <tr>
+                        <th scope="row">@estate.Id</th>
+                        <td>@estate.PropertyType</td>
+                        <td>@estate.SquareMeter</td>
+                        <td>@estate.FloorLocation</td>
+                        <td>@estate.NumberOfRooms</td>
+                        <td>@estate.BuildingFloor</td>
+                        <td>@estate.WarmingType</td>
+                        @if (estate.Owner != null)
+                        {
+                            <td>@estate.Owner.Name</td>
+                            <td>@estate.Owner.Surname</td>
+                        }
+                        else
+                        {
+                            <td>Empty</td>
+                            <td>Empty</td>
+                        }
+                        <td><a href="@Url.Action("Detail","Home",new {id = estate.Id })"><i class="fas fa-eye ml-3"></i></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

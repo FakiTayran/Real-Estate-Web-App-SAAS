@@ -1,0 +1,35 @@
+﻿@model Customer 
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container text-center">
+    <h1 class="display-4">Edit @Model.Name @Model.Surname</h1>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <form method="post" action=@Url.Action("Edit","Customer")>
+                <label asp-for="Name"></label>
+                <input type="text" class="form-control" asp-for="Name" />
+                <span asp-validation-for="Name"></span>
+                <label asp-for="Surname"></label>
+                <input type="text" class="form-control" asp-for="Surname" />
+                <span asp-validation-for="Surname"></span>
+                <label asp-for="Phone"></label>
+                <input type="text" class="form-control" asp-for="Phone" />
+                <span asp-validation-for="Phone"></span>
+                <label asp-for="Email"></label>
+                <input type="text" class="form-control" asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+                <input type="hidden" value="@ViewBag.userId" asp-for="ApplicationUserId" />
+                <div>
+                    <label asp-for="Description"></label>
+                    <textarea class="form-control" asp-for="Description" style="height:150px"></textarea>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-info form-control">Save Changes</button>
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
