@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "Upload Picture Page";
+}
+
+<h1 class="display-4">"@ViewBag.EstateIdAndOwnerNameSurname"</h1>
+
+<form action="@Url.Action("Upload","EstateImages")" class="dropzone" enctype="multipart/form-data">
+    <input type="hidden" name="estateId"  value="@ViewBag.EstateId"/>
+    <div class="fallback">
+        <input name="file" type="file" multiple />
+    </div>
+</form>

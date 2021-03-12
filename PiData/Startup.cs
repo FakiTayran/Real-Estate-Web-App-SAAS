@@ -13,6 +13,7 @@ using PiData.Data;
 using PiData.Data.Entities;
 using PiData.Managers;
 using PiData.Services;
+using PiData.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,7 @@ namespace PiData
             services.AddScoped<IHomeIndexViewModelService, HomeIndexViewModelManager>();
             services.AddScoped<ICustomerService, CustomerManager>();
             services.AddScoped<ICustomerIndexViewModelService, CustomerIndexViewModelManager>();
+            services.AddTransient<IFileUpload, FileSystemFileUploader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

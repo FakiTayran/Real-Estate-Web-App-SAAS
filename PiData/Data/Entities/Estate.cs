@@ -46,6 +46,8 @@ namespace PiData.Data.Entities
         public string ApplicationUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
 
+        public virtual ICollection<EstatePicture> EstatePictures { get; set; }
+
     }
 
     public enum PropertyType 

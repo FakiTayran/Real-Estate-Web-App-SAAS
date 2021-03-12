@@ -18,6 +18,8 @@ namespace PiData.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Estate> Estates { get; set; }
 
+        public DbSet<EstatePicture> EstatePictures { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
